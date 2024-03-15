@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import axios from 'axios';
 import toast from 'react-hot-toast';
 import Cookies from 'universal-cookie';
+import axiosInstance from '../axios/axiosConfig';
 
 const useEditJob = (job) => {
     const [isLoading, setIsLoading] = useState(false);
@@ -14,7 +14,7 @@ const useEditJob = (job) => {
             const cookies = new Cookies();
             const token = cookies.get('token');
             console.log(job);
-            const response = await axios.patch(`https://rbrcareers-seven.vercel.app/admin/job/${job._id}`, job, {
+            const response = await axiosInstance.patch(`/admin/job/${job._id}`, job, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`

@@ -1,11 +1,12 @@
 import { useQuery } from 'react-query';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
+import axiosInstance from '../axios/axiosConfig';
 const useGetJobApplications = (jobId) => {
     const cookies = new Cookies();
     const token = cookies.get('token');
   const getJobApplications = async () => {
-    const response = await axios.get(`https://rbrcareers-seven.vercel.app/admin/job/${jobId}`,{
+    const response = await axiosInstance.get(`/admin/job/${jobId}`,{
         headers: {
             'Authorization': `Bearer ${token}`
         }

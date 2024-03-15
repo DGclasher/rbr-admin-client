@@ -40,15 +40,13 @@ const Navbar = () => {
       {/* Menu items for sm and md screens */}
       <div className={`md:hidden ${isMenuOpen ? 'block' : 'hidden'} absolute top-full py-8  rounded-b-lg left-0 w-full bg-white shadow-lg transition-transform duration-300 transform`}>
         <ul className="flex flex-col items-center justify-center py-2 space-y-2">
-          <li>
+          {!user && (
+            <li>
             <NavLink to='/' className="font-semibold lg:text-xl hover:underline" onClick={() => setIsMenuOpen(false)}>Home</NavLink>
           </li>
-          <li>
-            <NavLink to='/careers' className="font-semibold lg:text-xl hover:underline" onClick={() => setIsMenuOpen(false)}>Careers</NavLink>
-          </li>
-          <li>
-            <NavLink to='/contact' className="font-semibold lg:text-xl hover:underline" onClick={() => setIsMenuOpen(false)}>Contact</NavLink>
-          </li>
+          )}
+         
+          
           {user && (
             <ul className='space-y-2'>
               <li>
@@ -64,15 +62,11 @@ const Navbar = () => {
       </div>
       {/* Menu items for lg screens and above */}
       <ul className={`md:flex md:items-center md:space-x-8 hidden ${isMenuOpen ? 'block' : ''}`}>
-        <li>
+        {!user && (
+          <li>
           <NavLink to='/' className="font-semibold lg:text-xl hover:underline" onClick={() => setIsMenuOpen(false)}>Home</NavLink>
         </li>
-        <li>
-          <NavLink to='/careers' className="font-semibold lg:text-xl hover:underline" onClick={() => setIsMenuOpen(false)}>Careers</NavLink>
-        </li>
-        <li>
-          <NavLink to='/contact' className="font-semibold lg:text-xl hover:underline" onClick={() => setIsMenuOpen(false)}>Contact</NavLink>
-        </li>
+        )}
         {user && (
           <ul className='flex items-center gap-6'>
           

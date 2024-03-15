@@ -4,6 +4,7 @@ import Cookies from "universal-cookie"
 import { jwtDecode } from 'jwt-decode'
 import { useNavigate } from "react-router-dom"
 import toast from "react-hot-toast"
+import axiosInstance from "../axios/axiosConfig"
 export const useLogin = () =>{
     const nav = useNavigate()
     const [error, setError] = useState(null)
@@ -20,23 +21,16 @@ export const useLogin = () =>{
             'password' : password,
         }
 
-        
-        const response = await fetch(`https://rbrcareers-seven.vercel.app/auth/login`,{
-            method: 'POST',
-            headers: {'Content-Type' : 'application/json'},
-            body: JSON.stringify(data)
+        const response = await axiosInstance.post('/auth/login', data, {
+            headers: {
+                'Content-Type': 'application/json',
+            }
         })
 
-        const json = await response.json()
+        const json = response.data
 
-        if(!response.ok)
-        {
-            setIsLoading(false)
-            console.log(json.message)
-            toast.error('Invalid credentials')
-        }
-
-        if(response.ok)
+        
+        if(response.status === 200)
         {
             // Decode the JWT token
             const decodedData = jwtDecode(json.token)
@@ -52,6 +46,12 @@ export const useLogin = () =>{
             setIsLoading(false)
             setError(null)
             
+        }
+        else
+        {
+            setIsLoading(false)
+            console.log(json.message)
+            toast.error('Invalid credentials')
         }
     }
    

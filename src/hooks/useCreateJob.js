@@ -2,6 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
 import toast from 'react-hot-toast';
+import axiosInstance from '../axios/axiosConfig';
 
 const useCreateJob = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -14,7 +15,7 @@ const useCreateJob = () => {
         const token = cookies.get('token');
 
         try {
-            const response = await axios.post('https://rbrcareers-seven.vercel.app/admin/job', formData, {
+            const response = await axiosInstance.post('/admin/job', formData, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`

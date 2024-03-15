@@ -1,12 +1,13 @@
 import { useMutation } from 'react-query';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
+import axiosInstance from '../axios/axiosConfig';
 
 const useDeleteApplicant = () => {
     const deleteApplicantMutation = useMutation(async (id) => {
         const cookies = new Cookies();
         const token = cookies.get('token');
-        await axios.delete(`https://rbrcareers-seven.vercel.app/admin/applicant/${id}`, {
+        await axiosInstance.delete(`/admin/applicant/${id}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }

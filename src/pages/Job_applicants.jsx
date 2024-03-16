@@ -7,11 +7,11 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 import CircularProgress from '@mui/material/CircularProgress';
 import useDeleteApplicant from '../hooks/useDeleteApplicant';
 import { MdDelete } from "react-icons/md";
-import axios from 'axios';
 import Cookies from 'universal-cookie';
 import { BiSolidSad } from "react-icons/bi";
 import { RiFileExcel2Line } from "react-icons/ri";
 import { useLocation } from 'react-router-dom';
+import axiosInstance from '../axios/axiosConfig';
 
 const Job_Applicants = () => {
   const { id } = useParams();
@@ -22,7 +22,7 @@ const Job_Applicants = () => {
 
   const handleExport = async () => {
     try {
-      const res = await axios.get(`https://rbrcareers-seven.vercel.app/admin/export/${id}`, {
+      const res = await axiosInstance.get(`/admin/export/${id}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         },
@@ -145,8 +145,8 @@ const Job_Applicants = () => {
                     <p>Semester: {applicant.semester}</p>
                     <p>College: {lastQualification.college}</p>
                     <p>University: {lastQualification.university}</p>
-                    <button onClick={() => handleLearnMore(applicant.id)} className='bg-lime-500 rounded px-2 py-1'>Learn More</button>
-                    <button onClick={() => handleDelete(applicant.id)} className='bg-red-500 rounded px-2 py-1 mx-4'>Delete</button>
+                    <button onClick={() => handleLearnMore(applicant._id)} className='bg-lime-500 rounded px-2 py-1'>Learn More</button>
+                    <button onClick={() => handleDelete(applicant._id)} className='bg-red-500 rounded px-2 py-1 mx-4'>Delete</button>
                   </div>
                 );
               })}

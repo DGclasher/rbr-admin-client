@@ -22,7 +22,7 @@ const Footer = () => {
         </div>
         <div className='flex w-full  flex-col items-start justify-center md:items-center gap-4 '>
             <p className='text-2xl font-semibold '>Contact Us</p>
-            <p className='flex gap-4 items-center'><MdEmail className='text-xl'/>raudra@gmail.com</p>
+            <p className='flex gap-4 items-center'><MdEmail className='text-xl'/>support@raudratechnologies.com</p>
         </div>
       </footer>
   )

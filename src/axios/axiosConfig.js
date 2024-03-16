@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-    baseURL: 'https://rbrcareers-seven.vercel.app'
+    baseURL: 'https://api.raudratechnologies.com'
 })
 
 export default axiosInstance;

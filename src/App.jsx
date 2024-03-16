@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-
 import Job_Applicants from './pages/Job_applicants';
 import Login from './pages/Login';
 import Job from './pages/Job';
 import Navbar from './Components/Navbar';
-import Footer from './Components/Footer';
 import CreateJobForm from './pages/CreateJobForm';
 import EditJobForm from './pages/EditJobForm';
 import Applicant from './pages/Applicant';
@@ -38,13 +36,17 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Login />} />
+          {!user &&  
+          <Route path="/" element={<Login />} /> 
+          }
+
           {/* <Route path="/admin_login" element={<Login />} /> */}
           <Route path="/job/:id" element={<Job />} />
          
           {/* Conditionally render admin routes if user exists */}
           {user ? (
             <>
+              <Route path="/" element={<Dashboard />} />
               <Route path="/admin/create_job" element={<CreateJobForm />} />
               <Route path="/admin/edit_job" element={<EditJobForm />} />
               <Route path="/admin/dashboard" element={<Dashboard />} />
@@ -53,13 +55,12 @@ function App() {
             </>
           ) : (
             // Redirect to login if user doesn't exist
-            <Route path="*" element={<Navigate to="/admin_login" />} />
+            <Route path="*" element={<Navigate to="/" />} />
           )}
 
           {/* Route for handling 404 or unauthorized access */}
           <Route path="*" element={<NotFound/>} />
         </Routes>
-        <Footer />
       </Router>
     </>
   );
